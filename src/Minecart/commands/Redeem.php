@@ -10,17 +10,18 @@ use Minecart\utils\Form;
 use Minecart\utils\Messages;
 use MineCart\Minecart;
 
-class Redeem  extends Command {
+class Redeem  extends Command
+{
     public function __construct()
     {
-        parent::__construct('redeem', 'Resgatar Keys');
-        $this->setAliases(['resgatar']);
+        parent::__construct("redeem", "Resgatar Keys");
+        $this->setAliases(["resgatar"]);
     }
 
     public function execute(CommandSender $sender, string $label, array $args) : bool
     {
         if(!$sender instanceof Player){
-            $sender->sendMessage(Minecart::getInstance()->getMessage('error.player-only'));
+            $sender->sendMessage(Minecart::getInstance()->getMessage("error.player-only"));
             return false;
         }
 

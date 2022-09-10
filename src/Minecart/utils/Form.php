@@ -6,12 +6,12 @@ use jojoe77777\FormAPI\CustomForm;
 use jojoe77777\FormAPI\ModalForm;
 use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\Player;
-
 use Minecart\task\RedeemCashAsync;
 use Minecart\task\RedeemVipAsync;
 use Minecart\Minecart;
 
-class Form {
+class Form
+{
     private $title;
     private $placeholder;
     private $key = '';
@@ -206,13 +206,15 @@ class Form {
 
     public function showMyKeys(Player $player) : void
     {
-        $form = new SimpleForm(function(Player $player, int $data = null){
-            if(is_null($data)) return;
+        $form = new SimpleForm(function(Player $player, int $data = null) {
+            if (is_null($data)) {
+                return;
+            }
 
-            $key = $this->products[$data]['key'];
+            $key = $this->products[$data]["key"];
 
-            $title = Minecart::getInstance()->getMessage('form.title');
-            $placeholder = Minecart::getInstance()->getMessage('form.placeholder');
+            $title = Minecart::getInstance()->getMessage("form.title");
+            $placeholder = Minecart::getInstance()->getMessage("form.placeholder");
 
             $this->setTitle($title);
             $this->setPlaceholder($placeholder);
@@ -222,27 +224,27 @@ class Form {
             $this->cooldown->removePlayerCooldown($player);
         });
 
-        if(!empty($this->products)) {
+        if (!empty($this->products)) {
             $i = 0;
             foreach ($this->products as $product) {
-                $info = Minecart::getInstance()->getMessage('success.player-list-keys-key');
+                $info = Minecart::getInstance()->getMessage("success.player-list-keys-key");
 
-                $key = $product['key'];
-                $group = $product['group'];
-                $duration = $product['duration'];
-                $info = str_replace(['{key}', '{group}', '{duration}'], [$key, $group, $duration], $info);
+                $key = $product["key"];
+                $group = $product["group"];
+                $duration = $product["duration"];
+                $info = str_replace(["{key}", "{key.group}", "{key.duration}"], [$key, $group, $duration], $info);
 
                 $form->addButton($info);
                 $i++;
             }
-        }else{
-            $this->setTitle('Erro!');
-            $this->setMessage(Minecart::getInstance()->getMessage('error.player-dont-have-key'));
+        } else {
+            $this->setTitle("Erro!");
+            $this->setMessage(Minecart::getInstance()->getMessage("error.player-dont-have-key"));
             $this->showFormError($player);
             return;
         }
 
-        $form->setTitle(Minecart::getInstance()->getMessage('success.player-list-keys-title'));
+        $form->setTitle(Minecart::getInstance()->getMessage("success.player-list-keys-title"));
 
         $this->cooldown->setPlayerInCooldown($player);
         $player->sendForm($form);

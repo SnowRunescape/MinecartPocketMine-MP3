@@ -12,7 +12,8 @@ use Minecart\Minecart;
 use Minecart\utils\Errors;
 use Minecart\utils\Messages;
 
-class RedeemCashAsync extends AsyncTask {
+class RedeemCashAsync extends AsyncTask
+{
     private $username;
     private $authorization;
     private $shopServer;
@@ -64,7 +65,7 @@ class RedeemCashAsync extends AsyncTask {
                 $form->setTitle('Erro!');
 
                 $errors = new Errors();
-                $error = $errors->getError($player, $response['response']['code'] ?? $statusCode, 'cash', true);
+                $error = $errors->getError($player, $response['response']['code'] ?? $statusCode, true);
 
                 $form->setMessage($error);
                 $form->showFormError($player);

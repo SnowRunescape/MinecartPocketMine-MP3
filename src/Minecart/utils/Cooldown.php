@@ -3,28 +3,23 @@
 namespace Minecart\utils;
 
 use pocketmine\Player;
-
 use Minecart\Minecart;
 
-class Cooldown{
-    private $utils;
-    private $cooldownTime = 5;
+class Cooldown
+{
+    const COOLDOWN = 5;
 
-    public function __construct()
-    {
-        $this->utils = new Utils();
-    }
     public function isInCooldown(Player $player) : bool
     {
         $playerName = strtolower($player->getName());
 
-        if(!empty(Minecart::getInstance()->cooldown[$playerName]))
-            //5 seconds cooldown
-            return (time() - Minecart::getInstance()->cooldown[$playerName]) <= $this->cooldownTime;
+        if (!empty(Minecart::getInstance()->cooldown[$playerName])) {
+            return (time() - Minecart::getInstance()->cooldown[$playerName]) <= self::COOLDOWN;
+        }
 
         return false;
     }
-    
+
     public function setPlayerInCooldown(Player $player) : void
     {
         $playerName = strtolower($player->getName());
@@ -34,7 +29,8 @@ class Cooldown{
     public function removePlayerCooldown(Player $player) : void
     {
         $playerName = strtolower($player->getName());
-        if(!empty(Minecart::getInstance()->cooldown[$playerName])){
+
+        if (!empty(Minecart::getInstance()->cooldown[$playerName])) {
             unset(Minecart::getInstance()->cooldown[$playerName]);
         }
     }
@@ -43,9 +39,9 @@ class Cooldown{
     {
         $playerName = strtolower($player->getName());
 
-        if(!empty(Minecart::getInstance()->cooldown[$playerName]))
-            //5 seconds cooldown
-            return $this->cooldownTime - (time() - Minecart::getInstance()->cooldown[$playerName]);
+        if (!empty(Minecart::getInstance()->cooldown[$playerName])) {
+            return self::COOLDOWN - (time() - Minecart::getInstance()->cooldown[$playerName]);
+        }
 
         return 0;
     }

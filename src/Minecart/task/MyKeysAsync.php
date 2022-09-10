@@ -10,7 +10,8 @@ use Minecart\utils\API;
 use Minecart\utils\Errors;
 use Minecart\Minecart;
 
-class MyKeysAsync extends AsyncTask {
+class MyKeysAsync extends AsyncTask
+{
     private $username;
     private $authorization;
     private $shopServer;
@@ -51,7 +52,7 @@ class MyKeysAsync extends AsyncTask {
                 $form->setTitle('Erro!');
 
                 $errors = new Errors();
-                $error = $errors->getError($player, $response['response']['code'] ?? $statusCode, 'vip', true);
+                $error = $errors->getError($player, $response['response']['code'] ?? $statusCode, true);
 
                 $form->setMessage($error);
                 $form->showFormError($player);

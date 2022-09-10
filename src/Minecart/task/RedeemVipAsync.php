@@ -12,7 +12,8 @@ use Minecart\Minecart;
 use Minecart\utils\Errors;
 use Minecart\utils\Messages;
 
-class RedeemVipAsync  extends AsyncTask {
+class RedeemVipAsync  extends AsyncTask
+{
     private $username;
     private $key;
     private $authorization;
@@ -74,7 +75,7 @@ class RedeemVipAsync  extends AsyncTask {
                 $form->setKey($this->key);
 
                 $errors = new Errors();
-                $error = $errors->getError($player, $response['response']['code'] ?? $statusCode, 'vip', true);
+                $error = $errors->getError($player, $response['response']['code'] ?? $statusCode, true);
                 $form->showRedeem($player, $error);
             }
         }else{
