@@ -28,7 +28,7 @@ class MyKeysAsync extends AsyncTask
         $api = new API();
         $api->setAuthorization($this->authorization);
         $api->setShopServer($this->shopServer);
-        $api->setParams(['username' => $this->username]);
+        $api->setParams(["username" => $this->username]);
         $api->setURL(API::MYKEYS_URI);
 
         $this->setResult($api->send());
@@ -39,26 +39,27 @@ class MyKeysAsync extends AsyncTask
         $player = $server->getPlayer($this->username);
         $response = $this->getResult();
 
-        if(!empty($response)){
-            $statusCode = $response['statusCode'];
-            if($statusCode == 200) {
-                $keys = $response['response']['products'];
+        if (!empty($response)) {
+            $statusCode = $response["statusCode"];
+
+            if ($statusCode == 200) {
+                $keys = $response["response"]["products"];
 
                 $form = new Form();
                 $form->setProducts($keys);
                 $form->showMyKeys($player);
-            }else{
+            } else {
                 $form = new Form();
-                $form->setTitle('Erro!');
+                $form->setTitle("Erro!");
 
                 $errors = new Errors();
-                $error = $errors->getError($player, $response['response']['code'] ?? $statusCode, true);
+                $error = $errors->getError($player, $response["response"]["code"] ?? $statusCode, true);
 
                 $form->setMessage($error);
                 $form->showFormError($player);
             }
-        }else{
-            $player->sendMessage(Minecart::getInstance()->getMessage('error.internal-error'));
+        } else {
+            $player->sendMessage(Minecart::getInstance()->getMessage("error.internal-error"));
         }
     }
 }

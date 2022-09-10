@@ -14,7 +14,7 @@ class Form
 {
     private $title;
     private $placeholder;
-    private $key = '';
+    private $key = "";
     private $redeemType;
     private $products = [];
     private $message;
@@ -66,7 +66,7 @@ class Form
 
         $form->setTitle($this->title);
         $form->setContent($this->message);
-        $form->addButton('Fechar');
+        $form->addButton("Fechar");
         $player->sendForm($form);
     }
 
@@ -77,8 +77,8 @@ class Form
 
             switch($data){
                 case 0: //VIP
-                    $title = Minecart::getInstance()->getMessage('form.title');
-                    $placeholder = Minecart::getInstance()->getMessage('form.placeholder');
+                    $title = Minecart::getInstance()->getMessage("form.title");
+                    $placeholder = Minecart::getInstance()->getMessage("form.placeholder");
 
                     $this->setTitle($title);
                     $this->setPlaceholder($placeholder);
@@ -90,15 +90,15 @@ class Form
                         if(is_null($data)) return;
 
                         $username = $player->getName();
-                        $authorization = Minecart::getInstance()->getCfg('Minecart.ShopKey');
-                        $shopServer = Minecart::getInstance()->getCfg('Minecart.ShopServer');
+                        $authorization = Minecart::getInstance()->getCfg("Minecart.ShopKey");
+                        $shopServer = Minecart::getInstance()->getCfg("Minecart.ShopServer");
 
                         if($data){
                             if($this->cooldown->isInCooldown($player)){
-                                $error = Minecart::getInstance()->getMessage('error.cooldown');
-                                $error = str_replace('{cooldown}', $this->cooldown->getCooldownTime($player), $error);
+                                $error = Minecart::getInstance()->getMessage("error.cooldown");
+                                $error = str_replace("{cooldown}", $this->cooldown->getCooldownTime($player), $error);
 
-                                $this->setTitle('Erro!');
+                                $this->setTitle("Erro!");
                                 $this->setMessage($error);
                                 $this->showFormError($player);
                                 return;
@@ -112,40 +112,40 @@ class Form
                         }
                     });
 
-                    $modal_title = Minecart::getInstance()->getMessage('modal.title');
-                    $message = Minecart::getInstance()->getMessage('modal.confirm-cash-message');
+                    $modal_title = Minecart::getInstance()->getMessage("modal.title");
+                    $message = Minecart::getInstance()->getMessage("modal.confirm-cash-message");
 
                     $form->setTitle($modal_title);
                     $form->setContent($message);
-                    $form->setButton1('§aSim');
-                    $form->setButton2('§cNão');
+                    $form->setButton1("§aSim");
+                    $form->setButton2("§cNão");
 
                     $player->sendForm($form);
                     break;
             }
         });
 
-        $form->setTitle('Ativar');
-        $form->addButton('§eVIP');
-        $form->addButton('§aCash');
+        $form->setTitle("Ativar");
+        $form->addButton("§eVIP");
+        $form->addButton("§aCash");
 
         $player->sendForm($form);
     }
 
-    public function showRedeem(Player $player, string $error = '') : void
+    public function showRedeem(Player $player, string $error = "") : void
     {
         $form = new CustomForm(function(Player $player, array $data = null){
             if(empty($data)) return;
 
-            $error = '';
+            $error = "";
 
             if(empty($data[0])){
-                $error = Minecart::getInstance()->getMessage('error.inform-key');
+                $error = Minecart::getInstance()->getMessage("error.inform-key");
             }
 
             if($this->cooldown->isInCooldown($player)){
-                $error = Minecart::getInstance()->getMessage('error.cooldown');
-                $error = str_replace('{cooldown}', $this->cooldown->getCooldownTime($player), $error);
+                $error = Minecart::getInstance()->getMessage("error.cooldown");
+                $error = str_replace("{cooldown}", $this->cooldown->getCooldownTime($player), $error);
             }
 
             $key = $data[0];
@@ -160,8 +160,8 @@ class Form
             }
 
             $username = $player->getName();
-            $authorization = Minecart::getInstance()->getCfg('Minecart.ShopKey');
-            $shopServer = Minecart::getInstance()->getCfg('Minecart.ShopServer');
+            $authorization = Minecart::getInstance()->getCfg("Minecart.ShopKey");
+            $shopServer = Minecart::getInstance()->getCfg("Minecart.ShopServer");
 
             switch($this->redeemType){
                 case self::REDEEM_VIP:
@@ -179,13 +179,13 @@ class Form
                         }
                     });
 
-                    $modal_title = Minecart::getInstance()->getMessage('modal.title');
-                    $message = Minecart::getInstance()->getMessage('modal.confirm-vip-message');
+                    $modal_title = Minecart::getInstance()->getMessage("modal.title");
+                    $message = Minecart::getInstance()->getMessage("modal.confirm-vip-message");
 
                     $form->setTitle($modal_title);
                     $form->setContent($message);
-                    $form->setButton1('§aSim');
-                    $form->setButton2('§cNão');
+                    $form->setButton1("§aSim");
+                    $form->setButton2("§cNão");
 
                     $player->sendForm($form);
                     break;
@@ -195,7 +195,7 @@ class Form
         });
 
         $form->setTitle($this->title);
-        $form->addInput('Key', $this->placeholder, $this->key);
+        $form->addInput("Key", $this->placeholder, $this->key);
 
         if(!empty($error))
             $form->addLabel($error);
