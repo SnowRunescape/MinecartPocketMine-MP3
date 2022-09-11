@@ -41,6 +41,11 @@ class RedeemVipAsync extends AsyncTask
     public function onCompletion(Server $server) : void
     {
         $player = $server->getPlayerExact($this->username);
+
+        if (!$player instanceof Player) {
+            return;
+        }
+
         $response = $this->getResult();
 
         if (!empty($response)) {
