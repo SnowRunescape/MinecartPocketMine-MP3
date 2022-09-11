@@ -21,7 +21,7 @@ class Form
     private $cooldown;
 
     const REDEEM_VIP = 1;
-    const REDEEM_CASH  = 2;
+    const REDEEM_CASH = 2;
 
     public function __construct()
     {
