@@ -140,7 +140,7 @@ class Form
 
     public function showRedeem(Player $player, string $error = "") : void
     {
-        $form = new CustomForm(function(Player $player, array $data = null){
+        $form = new CustomForm(function(Player $player, array $data = null) {
             if (empty($data)) {
                 return;
             }
@@ -173,12 +173,12 @@ class Form
 
             switch ($this->redeemType) {
                 case self::REDEEM_VIP:
-                    $form = new ModalForm(function(Player $player, bool $data = null) use ($username, $authorization, $shopServer, $key){
+                    $form = new ModalForm(function(Player $player, bool $data = null) use ($username, $authorization, $shopServer, $key) {
                         if (empty($data)) {
                             return;
                         }
 
-                        switch($data){
+                        switch ($data) {
                             case true:
                                 $messages = new Messages();
                                 $messages->sendWaitingResponseInfo($player);
