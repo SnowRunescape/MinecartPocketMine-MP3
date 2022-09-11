@@ -20,7 +20,7 @@ class Redeem  extends Command
 
     public function execute(CommandSender $sender, string $label, array $args) : bool
     {
-        if(!$sender instanceof Player){
+        if (!$sender instanceof Player) {
             $sender->sendMessage(Minecart::getInstance()->getMessage("error.player-only"));
             return false;
         }

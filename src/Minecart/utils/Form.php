@@ -60,8 +60,10 @@ class Form
 
     public function showFormError(Player $player) : void
     {
-        $form = new SimpleForm(function(Player $player, int $data = null){
-            if(empty($data)) return;
+        $form = new SimpleForm(function(Player $player, int $data = null) {
+            if (empty($data)) {
+                return;
+            }
         });
 
         $form->setTitle($this->title);
@@ -72,10 +74,12 @@ class Form
 
     public function showChoose(Player $player) : void
     {
-        $form = new SimpleForm(function (Player $player, int $data = null){
-            if(is_null($data)) return;
+        $form = new SimpleForm(function(Player $player, int $data = null) {
+            if (is_null($data)) {
+                return;
+            }
 
-            switch($data){
+            switch ($data) {
                 case 0: //VIP
                     $title = Minecart::getInstance()->getMessage("form.title");
                     $placeholder = Minecart::getInstance()->getMessage("form.placeholder");
@@ -86,15 +90,17 @@ class Form
                     $this->showRedeem($player);
                     break;
                 case 1: //CASH
-                    $form = new ModalForm(function(Player $player, bool $data = null){
-                        if(is_null($data)) return;
+                    $form = new ModalForm(function(Player $player, bool $data = null) {
+                        if (is_null($data)) {
+                            return;
+                        }
 
                         $username = $player->getName();
                         $authorization = Minecart::getInstance()->getCfg("Minecart.ShopKey");
                         $shopServer = Minecart::getInstance()->getCfg("Minecart.ShopServer");
 
-                        if($data){
-                            if($this->cooldown->isInCooldown($player)){
+                        if ($data) {
+                            if ($this->cooldown->isInCooldown($player)) {
                                 $error = Minecart::getInstance()->getMessage("error.cooldown");
                                 $error = str_replace("{cooldown}", $this->cooldown->getCooldownTime($player), $error);
 
@@ -135,22 +141,24 @@ class Form
     public function showRedeem(Player $player, string $error = "") : void
     {
         $form = new CustomForm(function(Player $player, array $data = null){
-            if(empty($data)) return;
+            if (empty($data)) {
+                return;
+            }
 
             $error = "";
 
-            if(empty($data[0])){
+            if (empty($data[0])) {
                 $error = Minecart::getInstance()->getMessage("error.inform-key");
             }
 
-            if($this->cooldown->isInCooldown($player)){
+            if ($this->cooldown->isInCooldown($player)) {
                 $error = Minecart::getInstance()->getMessage("error.cooldown");
                 $error = str_replace("{cooldown}", $this->cooldown->getCooldownTime($player), $error);
             }
 
             $key = $data[0];
 
-            if(!empty($error)){
+            if (!empty($error)) {
                 $this->setTitle($this->title);
                 $this->setKey($key);
                 $this->setPlaceholder($this->placeholder);
@@ -163,10 +171,12 @@ class Form
             $authorization = Minecart::getInstance()->getCfg("Minecart.ShopKey");
             $shopServer = Minecart::getInstance()->getCfg("Minecart.ShopServer");
 
-            switch($this->redeemType){
+            switch ($this->redeemType) {
                 case self::REDEEM_VIP:
                     $form = new ModalForm(function(Player $player, bool $data = null) use ($username, $authorization, $shopServer, $key){
-                        if(empty($data)) return;
+                        if (empty($data)) {
+                            return;
+                        }
 
                         switch($data){
                             case true:
@@ -197,8 +207,9 @@ class Form
         $form->setTitle($this->title);
         $form->addInput("Key", $this->placeholder, $this->key);
 
-        if(!empty($error))
+        if (!empty($error)) {
             $form->addLabel($error);
+        }
 
         $player->sendForm($form);
     }
