@@ -12,7 +12,7 @@ use Minecart\Minecart;
 use Minecart\utils\Errors;
 use Minecart\utils\Messages;
 
-class RedeemVipAsync  extends AsyncTask
+class RedeemVipAsync extends AsyncTask
 {
     private $username;
     private $key;
