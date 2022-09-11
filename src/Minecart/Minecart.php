@@ -2,9 +2,9 @@
 
 namespace Minecart;
 
-use Minecart\commands\Redeem;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use Minecart\commands\Redeem;
 use Minecart\commands\MyKeys;
 use Minecart\utils\Configuration;
 use Minecart\utils\Messages;
