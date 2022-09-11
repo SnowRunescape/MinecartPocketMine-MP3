@@ -45,9 +45,9 @@ class Messages
 
         Minecart::getInstance()->getServer()->broadcastTitle($title, $subtitle);
 
-        $x = $player->getPosition()->getX();
-        $y = $player->getPosition()->getY();
-        $z = $player->getPosition()->getZ();
+        $x = $player->getX();
+        $y = $player->getY();
+        $z = $player->getZ();
 
         $pk = new PlaySoundPacket();
         $pk->soundName = "random.levelup";
@@ -57,6 +57,6 @@ class Messages
         $pk->pitch = 1;
         $pk->volume = 300;
 
-        $player->getNetworkSession()->sendDataPacket($pk);
+        $player->getLevel()->broadcastGlobalPacket($pk);
     }
 }
