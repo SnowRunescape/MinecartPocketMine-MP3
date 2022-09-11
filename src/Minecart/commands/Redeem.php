@@ -7,7 +7,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use Minecart\utils\Form;
 use Minecart\utils\Messages;
-use MineCart\Minecart;
+use Minecart\Minecart;
 
 class Redeem extends Command
 {
