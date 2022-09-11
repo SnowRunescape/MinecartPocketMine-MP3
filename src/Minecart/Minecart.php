@@ -14,7 +14,7 @@ class Minecart extends PluginBase
     const VERSION = "2.1.0";
 
     public $messages = [];
-    public $config  = [];
+    public $config = [];
 
     public $cooldown = [];
 
